@@ -9,6 +9,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
+// READ All Tours
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -19,6 +20,7 @@ const getAllTours = (req, res) => {
   });
 };
 
+// READ Single Tour
 const getTour = (req, res) => {
   console.log(req.params);
   const id = req.params.id * 1;
@@ -40,6 +42,7 @@ const getTour = (req, res) => {
   });
 };
 
+// CREATE A Tour
 const createTour = (req, res) => {
   // console.log(req.body);
   const newId = tours[tours.length - 1].id + 1;
@@ -60,6 +63,7 @@ const createTour = (req, res) => {
   );
 };
 
+// UPDATE A Tour
 const updateTour = (req, res) => {
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -76,6 +80,7 @@ const updateTour = (req, res) => {
   });
 };
 
+// DELETE A Tour
 const deleteTour = (req, res) => {
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -89,6 +94,8 @@ const deleteTour = (req, res) => {
     data: null,
   });
 };
+
+// ROUTES
 
 // app.get('/api/v1/tours', getAllTours);
 // app.get('/api/v1/tours/:id', getTour);
@@ -104,6 +111,7 @@ app
   .patch(updateTour)
   .delete(deleteTour);
 
+// PORT
 const port = 3000;
 app.listen(port, () => {
   console.log(`App running on port ${port}..`);
